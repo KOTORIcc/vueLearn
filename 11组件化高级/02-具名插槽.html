@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+  <div id="app">
+		<cpn></cpn>
+		<h1>------</h1>
+		<cpn>
+			<h1>altered the none-name slot element</h1>
+		</cpn>
+		<h1>-------</h1>
+		<cpn>
+			<h1 slot="right">successfully altered the element with right slot name</h1>
+		</cpn>
+		<cpn>
+			<span slot="right">右边</span>
+			<span slot="center">中间</span>
+			<span slot="left">左边</span>
+			<span>无名</span>
+		</cpn> n
+  </div>
+
+	<template id="cpn">
+		<div>
+			<h3>an unalterable element</h3>
+			<slot name="right"><span>right</span></slot>
+			<slot name="center"><span>center</span></slot>
+			<slot name="left"><span>left</span></slot>
+			<slot><span>non-named slot</span></slot>
+		</div>
+	</template>
+
+  <script src="../vue.js"></script>
+  <script>
+		let cpn = {
+			template:'#cpn',
+		}
+    let app = new Vue({
+      el:'#app',
+      data:{
+      },
+      methods:{
+      },
+      components:{
+				cpn
+      }
+    })
+  </script>
+</body>
+</html>

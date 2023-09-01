@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--input如果不写key vue会复用input元素，所以切换时input内已经输入的内容不会变，key相同的input之间可以复用-->
+    <label v-if="signinchioce">账号登录：<input placeholder="账号" key="username"></label>
+    <label v-else>邮箱登录：<input placeholder="邮箱" key="email"></label>
+    <button @click="change">切换登录方式</button>
+</div>
+
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      signinchioce:true,
+    },
+    methods:{
+      change(){
+        this.signinchioce = !this.signinchioce
+      }
+    }
+  })
+</script>
+
+
+
+</body>
+</html>

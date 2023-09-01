@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+
+<cpn></cpn>
+<!--  child在parent中申明，并没有在app根组件中申明。所以无效-->
+  <child></child>
+
+
+</div>
+<script src="../vue.js"></script>
+<script>
+
+  const cpnchild = Vue.extend({
+  template:`
+    <div>
+      <h1>child here</h1>
+    </div>
+    `
+  })
+
+  const cpnparent = Vue.extend({
+    template:`
+      <div>
+        <h1>parent here</h1>
+        <child></child>
+      </div>
+    `,
+    components:{
+      child:cpnchild
+    }
+  })
+//其实可以把Vue实例看作组件中的root根组件
+  let app = new Vue({
+    el:'#app',
+    template:{//也可以写template
+    },
+    data:{
+    },
+    methods:{
+    },
+    components:{
+      cpn:cpnparent
+    }
+
+  })
+</script>
+</body>
+</html>

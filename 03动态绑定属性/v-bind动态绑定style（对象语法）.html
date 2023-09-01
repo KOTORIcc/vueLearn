@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+<!--  <h1 :style="{key(属性名):values(属性值)}"></h1>  属性名vue会忽略，直接对应style合法属性值，value中默认都是对象，在data中找，加‘’变成普通字符串-->
+  <h1 :style="{color:'red'}">直接赋值对象</h1>
+  <h1 :style="{color:fontcolor}">通过vue的data赋值</h1>
+  <h1 :style="getcolor()">通过vue函数赋值</h1>
+
+
+
+</div>
+
+
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      fontcolor:'red',
+    },
+    methods:{
+      getcolor:function (){
+        return {color:'red'};
+
+      }
+    }
+
+  })
+</script>
+
+</body>
+</html>

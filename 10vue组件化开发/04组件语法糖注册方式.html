@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+
+<cpnglobal></cpnglobal>
+<rule></rule>
+
+</div>
+<script src="../vue.js"></script>
+<script>
+
+<!--  全局组件语法糖  省略了extend代码，底层还是在执行的，只是免写-->
+  Vue.component('cpnglobal',{
+    template:`
+        <div>
+            <h1>global here</h1>
+        </div>
+    `
+  })
+  let app = new Vue({
+    el:'#app',
+    data:{
+    },
+    methods:{
+    },
+    components:{
+      // global:cpnglobal,
+      'rule':{
+        template:`
+          <div>
+            <h1>rule here</h1>
+          </div>
+        `
+      }
+    },
+  })
+</script>
+</body>
+</html>

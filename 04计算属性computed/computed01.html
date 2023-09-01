@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <h1>{{fullname}}</h1>
+
+</div>
+
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            firstname:'x',
+            lastname:'y'
+        },
+        computed:{//跟methods的区别在于vue是把computed的内容当作一个属性看，只不过这个属性需要一个函数来计算他的结果，
+            //vue自动调用函数获取结果赋值给这个属性
+            //所以在使用的时候调用的是属性，而不是一个函数，所以调用的时候不用写()
+            //所以起名字的时候最好起一个看起来像属性的名字，因为他本来就是属性不是函数
+            //computed是有缓存的，空间换时间，运行一次得到结果之后就不会再运行了，methods调用一次就得计算一次
+            //虽然computed只计算一次，但是仍然能保证vue的响应式特征，数据修改了，仍然会实时变更，数据变了就再算一次
+            fullname(){
+                return this.firstname + this.lastname;
+            }
+        },
+        methods:{
+            getfullname(){
+                return this.firstname + this.lastname;
+            }
+        }
+
+    })
+
+</script>
+
+</body>
+</html>

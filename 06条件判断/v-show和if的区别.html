@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+<!--v-if:逻辑判断是否有这个元素
+    v-show：有这个元素，判断要不要显示
+    v-if为false这个元素真的就从dom中消失了，但是show只是把它隐藏了
+    所以在频繁切换时适用show
+    但是实际上if用的多-->
+  <label v-if="isshow">v-if：</label>
+  <label v-show="isshow">v-show：</label>
+  <button @click="change">切换isshow</button>
+</div>
+
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      isshow:true,
+    },
+    methods:{
+      change(){
+        this.isshow = !this.isshow
+      }
+    }
+  })
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+<ul>
+<!--  为什么要添加key属性？
+可以提升vue虚拟dom的性能
+原理：vue有虚拟dom原地复用的设定，提高资源复用率
+为了实现vue的同步更新，vue会检测数据的变动，数据变动后会生成新的虚拟dom，再与旧的虚拟dom之间进行比较
+如果新旧的虚拟dom中两个key相同的li标签的内容一致，则不会调整实际dom，节省性能消耗，仅调整发生变动的li标签
+如果不写key值，vue默认为index，这是十分低效的
+原：                              如果这时要在表头添加一个{id:4,name:'小孙',age:10}
+                                  vue会重置li的index索引
+    li 0 id:001,name:'小明',age:12    li 0 id:004,name:'小孙',age:10
+    li 1 id:002,name:'小李',age:21    li 1 id:001,name:'小明',age:12
+    li 2 id:003,name:'小张',age:18    li 2 id:002,name:'小李',age:21
+       ，，                           li 3 id:003,name:'小张',age:18
+    这个时候 vue在判断复用元素的时候会发现
+    key为0的两个li的内容不一样，key为1、2的li内容也不一样，所以vue会把所有元素都重新渲染，浪费性能
+    如果把key设置为与元素内容有关的，且不会重复的值，例如设为.id
+    这样
+    li 001 id:001,name:'小明',age:12    li 004 id:004,name:'小孙',age:10
+    li 002 id:002,name:'小李',age:21    li 001 id:001,name:'小明',age:12
+    li 003 id:003,name:'小张',age:18    li 002 id:002,name:'小李',age:21
+       ，，                             li 003 id:003,name:'小张',age:18
+    vue在判断复用的时候，就会发现，两个key值一样的li中的内容也一样，只需要把新增的li渲染在真实dom上即可，极大的提升了效率
+   -->
+  <li v-for="p in pp" key="p.id">{{p.id}} {{p.age}} {{p.name}}</li>
+</ul>
+
+
+</div>
+<script src="../vue.js"></script>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+          pp:[
+            {id:'001',name:'小明',age:12},
+            {id:'002',name:'小李',age:21},
+            {id:'003',name:'小张',age:18}
+          ]
+        },
+        methods:{
+
+        }
+
+    })
+</script>
+</body>
+</html>

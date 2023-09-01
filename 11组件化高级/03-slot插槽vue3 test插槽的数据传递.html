@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+<!--vue的组件实例等于组件的父组件 root组件-->
+<div id="app">
+
+	<cpn></cpn>
+	<h1>-------</h1>
+	<cpn>
+			<span>
+				alter the elements in child template but template must with slot tag
+			</span>
+	</cpn>
+	<h1>--------</h1>
+	<cpn>
+		<template v-slot="slot"> <!--引用插槽对象-->
+			<ul>
+				<li v-for="item in slot.abc">{{item}}  ++++</li> <!--确定插槽对象中绑定的哪个数据-->
+			</ul>
+		</template>
+	</cpn>
+	<!--		组件调用时里面写东西可以替换掉原组件   -->
+</div>
+
+<!--	由子组件提供数据，父组件修改子组件的数据时，使用slot插槽，把子组件的数据传递给父组件-->
+<!--	子组件-->
+<template id="cpn">
+	<div>
+		<h1>this element out of slot tag cant be altered</h1>
+		<slot :abc="list"> <!--只有加了slot标签，标签内的元素才能被父组件替换-->
+			<!--加了name/id属性之后就是具名插槽-->
+			<ul>
+				<li v-for="item in list">{{item}}</li>
+			</ul>
+		</slot>
+	</div>
+</template>
+
+<script src="../vue.global.js"></script>
+<script>
+	// console.log(Vue.version);
+	const cpn = {
+		template:'#cpn',
+		data(){
+			return{
+				list:['a','b','c','d']
+			}
+		},
+	}
+
+	const app = Vue.createApp({
+			data(){
+				return {}
+			},
+			methods:{
+			},
+			components:{
+			cpn
+			}
+	})
+	app.mount('#app')
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+  //老东西了，静态变量，const变量内容不可修改，定义必须赋值（又不给修改，定义还不给值，这是没有意义的定义）
+  //const变量只负责指针指向的内容不可变动
+  const a = {//此时const a变量指向了一个对象地址 键值对
+    b:12,
+    c:'ada',
+  }
+//因为a指向的是{}这个对象的地址，所以这个对象不可更改，但是对象地址中的各个属性是可以被修改的（二级指针）
+  //不能改变指向，可以改变被指向地址中的内容
+  a.b=12;
+  a.c=32;
+
+</script>
+
+</body>
+</html>

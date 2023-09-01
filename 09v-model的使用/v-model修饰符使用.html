@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--lazy懒加载，只有对象在失去焦点或回车是才同步message-->
+<input type="text" v-model.lazy="message">
+  <h2>{{message}}</h2>
+
+<!--  number 默认input认为是字符串，number标签限制输入为数字，且获取元素为数字-->
+<!--         限制只能输入数字     限制传递的数据为数字类型-->
+  <input type="number" v-model.number="age">
+  <h2>{{typeof age}}</h2>
+<!--  trim 剥除输入数据两头的空格-->
+  <input type="text" v-model.trim="name">
+  <h2>{{name}}</h2>
+</div>
+<script src="../vue.js"></script>
+<script>
+
+    let app = new Vue({
+        el:'#app',
+        data:{
+          message:'',
+          age:'',
+          name:''
+        },
+        methods:{
+
+        }
+
+    })
+</script>
+</body>
+</html>

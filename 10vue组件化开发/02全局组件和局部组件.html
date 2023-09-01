@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <!--使用组件 app实例未申明mycpn组件，不可调用-->
+  <mycpn></mycpn>
+</div>
+
+<div id="app2">
+  <!--使用组件 app2实例申明mycpn组件，可调用-->
+  <mycpn></mycpn>
+</div>
+
+<script src="../vue.js"></script>
+<script>
+  <!-- 1、创建组件对象 -->
+  const cpn = Vue.extend({
+    template:`
+        <h1>mycpn</h1>
+        `//`标记即多行注释，方便写多行
+  })
+
+
+  // 注册组件、申明组件 这时全局组件的申明方式 mycpn即全局组件名
+  // Vue.component('mycpn',cpn)
+
+
+  //局部组件指组件指定一个Vue实例可以调用
+  //这就是一个Vue实例app
+  let app = new Vue({
+    el:'#app',
+    data:{
+    },
+    methods:{
+    }
+  })
+  //再申明一个Vue实例app2
+  let app2 = new Vue({
+    el:'#app2',
+    data:{
+    },
+    methods:{
+    },
+    components:{
+      mycpn:cpn//局部申明组件，app2的Vue实例申明使用该组件
+    }
+
+  })
+</script>
+</body>
+</html>

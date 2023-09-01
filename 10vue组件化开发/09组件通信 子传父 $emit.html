@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+<!--父组件模板-->
+  <div id="app">
+<!--		这里不是click因为自己定义了一个事件，所以需要监听自定义的事件-->
+  	<cpn @cbtnclick="cbtnclick"></cpn> <!--这里不需要传参，因为vue在函数不给出()时会默认传递一个值，
+  	在vue提供的事件中，调用函数不给()会默认传递事件发起的对象
+  	在自定义事件中这个值是$emit('',item)里的item-->
+
+
+  </div>
+
+<!--子组件模板-->
+	<template id="cpn">
+		<div>
+			<button v-for="item in categories" @click="btnclick(item)">{{item.name}}</button>
+		</div>
+	</template>
+
+  <script src="../vue.js"></script>
+  <script>
+
+		const cpn = {
+			template:'#cpn',
+			props:{
+			},
+			data(){
+				return{
+					categories:[
+						{name:'a', age: 12},
+						{name:'b', age: 14}
+					]
+				}
+			},
+			methods: {
+				btnclick(item){ //子模版中的按钮接受到了点击事件，并返回了item值
+					//把点击事件返回的值传达给父组件
+					this.$emit('cbtnclick',item) //自定义组件发出的事件名为cbtnclick,并传递一个参数item,
+					// 父组件要像监听按钮事件一样监听子组件的事件
+				}
+			}
+		}
+
+    let app = new Vue({
+      el:'#app',
+      data:{
+      },
+      methods:{
+				cbtnclick(item){
+					console.log(item)
+				}
+      },
+      components:{
+				cpn
+      },
+
+    })
+  </script>
+</body>
+</html>

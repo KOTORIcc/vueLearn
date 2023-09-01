@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+    .color{
+        color:plum;
+    }
+    .color1{
+        color: aqua;
+    }
+</style>
+<body>
+<div id="app" >
+    <h1 :class="['color','color1']">数组语法-直接填内容</h1>
+    <h1 :class="[color,color1]">数组语法-调用vue的data</h1>
+    <h1 :class="getclass()">数组语法-调用vue的函数</h1>
+    <button v-on:click="btnclick">切换颜色</button>
+</div>
+
+
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'信息',
+      color:'color',
+      color1:'color1',
+    },
+    methods:{
+      getclass:function (){
+        return [this.color];
+      },
+      btnclick:function (){
+          a = this.color;
+          this.color = this.color1;
+          this.color1 = a;
+      }
+    }
+  })
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+	<div id="app">
+
+		<mycpn></mycpn>
+
+
+		<!--在脚本区写好模板-->
+		<template id="mycpn">
+			<div>
+				<h1>1234</h1>
+			</div>
+		</template>
+
+
+	</div>
+
+	<script src="../vue.js"></script>
+	<script>
+  	let app = new Vue({
+    	el:'#app',
+  	  data:{
+  	  },
+ 	   	methods:{
+  	  },
+			components:{
+				// 申明局部模板
+				'cpn':{template:'#mycpn'}
+
+    	}
+  	})
+	</script>
+</body>
+</html>

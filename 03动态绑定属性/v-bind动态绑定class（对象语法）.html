@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+  .color{
+    color: lightcoral;
+  }
+</style>
+
+<body>
+
+<!--class={属性：flag，属性：flag} 可以对flag设定逻辑，动态改变，这里传递给class的是一个对象，不再是一个值
+    可以再写一个class，vue会把所有合法的class整合在一起-->
+<div id="app" class="title" :class="{color:iscolor , nonecolor:isblack}">
+  <h1 >{{message}}</h1>
+<!--class后面跟的太长？用函数包装一下-->
+  <h1 :class="getcolor()">改改颜色</h1>
+
+  <button v-on:click="btnclick">切换颜色</button>
+</div>
+
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'vue',
+      color:'color',
+      iscolor:true,
+      isblack:false,
+    },
+    methods:{
+      btnclick:function (){
+        this.iscolor = !this.iscolor
+        this.isblack = !this.isblack
+      },
+      getcolor:function (){
+          return {color:this.iscolor , nonecolor:this.isblack}
+      }
+    }
+  })
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--    v-model传递的值时value中设定的值-->
+<!--    name用来绑定两个radio，只能选择一个-->
+
+<!--  <label for="male"><input type="radio" id="male" name="sex" value="354" v-model="sex">男</label>-->
+<!--  <label for="female"><input type="radio" id="female" name="sex" value="4648" v-model="sex">女</label>-->
+    <!--    用v-model可以省略name-->
+    <label for="male"><input type="radio" id="male" value="354" v-model="sex">男</label>
+    <label for="female"><input type="radio" id="female" value="4648" v-model="sex">女</label>
+    <h1>{{sex}}</h1>
+</div>
+<script src="../vue.js"></script>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            sex:''
+        },
+        methods:{
+
+        }
+
+    })
+</script>
+</body>
+</html>

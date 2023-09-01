@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--  <h1 :style="[一个一个元素，数组，这里没有键值对,传递一个对象]"></h1>  -->
+    <h1 :style="[basestyle,basestyle2]">传递vue内元素</h1>
+    <h1 :style="[{color:fontcolor,frontSize:'20px'}]">直接写对象</h1>
+    <h1 :style="[getstyle()]">通过vue函数赋值</h1>
+
+
+
+</div>
+
+
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            fontcolor:'red',
+            basestyle:{color:'red'},
+            basestyle2:{fontSize:'100px'}
+        },
+        methods:{
+            getstyle(){//方法名：function(){}可以把：function省略掉，测总算正常点了
+                return {color:'red',fontSize:'200px'};
+
+            }
+        }
+
+    })
+</script>
+
+</body>
+</html>

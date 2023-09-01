@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+
+	<div id="app">
+
+	</div>
+	<script src="renderer.js"></script>
+	<script>
+
+		//1、通过h函数创建一个VNode
+		const vdom = h('div', {class: 'why', id: 'oldId'}, [
+			h('h2', null, '当前计数: 100'),
+			h('button', {onClick: () => {}}, '+1')
+		])
+		// console.log(vdom);
+		//这个时候 vnode已经是一个虚拟dom了 已经是一堆 vnode节点的树结构集合了
+
+		//2、通过mount函数 把vnode挂载到app上
+		//传入 虚拟dom vnode 和 container 容器
+		mount(vdom, document.querySelector('#app'))
+
+		setTimeout(() => {
+			//创建一个新的vdom
+			const vdom1 = h('div', {class: 'aaaa', id: 'newId'}, [
+				h('h2', null, '当前计数: 200'),
+				h('button', {onClick: () => {}}, 'ada')
+			])
+			
+			//需要一个比较器 作diff算法 来比较这两个vdom之间的不同 修改dom
+			patch(vdom, vdom1)
+		}, 2000)
+		// console.log(vdom.el.innerHTML,'innerHTML');
+		// console.log(vdom.el.textContent,'textContent');
+
+
+	</script>
+</body>
+</html>

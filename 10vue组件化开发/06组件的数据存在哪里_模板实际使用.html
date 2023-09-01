@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+  <div id="app">
+		<h1>三个模板调用</h1>
+		<mycounter></mycounter>
+		<mycounter></mycounter>
+		<mycounter></mycounter>
+  </div>
+
+<!--	模板要写在vue区块外面，不然会被执行-->
+	<template id="mycounter">
+<!--		模板是封装的，需要一个容器把所有元素封装起来 如div-->
+		<div>
+			<h1>计数器：{{counter}}</h1>
+			<!--	@是v-on的语法糖	-->
+			<button @click="increment">+</button>
+			<button @click="decrement">-</button>
+		</div>
+	</template>
+  <script src="../vue.js"></script>
+  <script>
+    let app = new Vue({
+      el:'#app',
+      data:{
+      },
+      methods:{
+      },
+      components:{
+				// 在vue实例下注册申明模板为mycounter，并提供数据支持
+				'mycounter':{
+					// 填充模板内容
+					template:'#mycounter',
+					// 模板的数据存放在申明模板的实例下，以函数的方式传递数据
+					//为什么一定要是函数：因为一个模板可能会复用很多次，避免多个组件之间数据出现干扰，函数有自有作用域，可以解决这个问题
+					data(){
+						return{
+							counter:0
+						}
+					},
+					// 	同样也可以定义函数
+					methods:{
+						increment() {
+							this.counter++
+						},
+						decrement() {
+							this.counter--
+						}
+					}
+				}
+      }
+    })
+  </script>
+</body>
+</html>

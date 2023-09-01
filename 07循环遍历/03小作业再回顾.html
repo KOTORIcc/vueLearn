@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<style>
+  .active{
+    color:red
+  }
+</style>
+<body>
+<div id="app">
+<ul>
+  <li :class="{active: index===currentindex}" @click="changecurrentindex(index)" v-for="(item,index) in movies">{{item}}</li>
+</ul>
+
+
+</div>
+<script src="../vue.js"></script>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+          currentindex:-1,
+          movies:['流浪地球2','深海','玲芽之旅','忠犬八公']
+        },
+        methods:{
+          changecurrentindex(index){
+            if (index===this.currentindex){
+              this.currentindex = -1;
+            }else{
+              this.currentindex = index;
+            }
+
+          }
+        }
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+
+<style>
+  .color{
+    color:red;
+  }
+</style>
+
+<body>
+<div id="movielist">
+  <ul>
+    <li :class="getcolor(index)" @click="changecolor(index)" v-for="(m,index) in movies">{{index+1}} {{m}}</li>
+
+  </ul>
+
+</div>
+
+<script>
+  let app = new Vue({
+    el:'#movielist',
+    data:{
+      movies:['流浪地球2','深海','玲芽之旅','忠犬八公'],
+      color:'color',
+      isactive:[false,false,false,false]
+    },
+    methods:{
+      changecolor:function (index){
+        if (this.isactive[index]===true){
+        }else{
+          this.isactive = [false,false,false,false];
+          this.isactive[index] = !this.isactive[index];
+        }
+
+        console.log(index);
+      },
+      getcolor:function (index){
+        return {color:this.isactive[index]};
+      }
+    }
+
+
+  })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+<!--  比较适合简单的逻辑判断，方便使用，如果ifelse需要判断的过多，不建议这样写，阅读性很差，不如使用conputed属性-->
+<!--  下面这样就不建议这样写，太麻烦了-->
+  <h1 v-if="grade>=60">合格</h1>
+  <h1 v-else-if="grade>=80">优秀</h1>
+  <h1 v-else>不合格</h1>
+
+<!--  比较正常的使用案例,需要一点点的改动就行-->
+  <h1 v-if="isshow">isshow为true时展示我</h1>
+  <h1 v-else>isshow为false时展示我</h1>
+  <button @click="changeisshow">change isshow</button>
+
+</div>
+
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      grade:70,
+      isshow:true,
+    },
+    methods:{
+      changeisshow(){
+        this.isshow = !this.isshow;
+      }
+    }
+
+  })
+</script>
+
+</body>
+</html>

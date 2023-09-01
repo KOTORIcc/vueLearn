@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<!---->
+<div id="app">
+  <!--mustache有多种方式，可以进行简单的运算-->
+  <h1 >{{message}}</h1>
+  <h1>{{num *2}}</h1>
+  <h1>{{num *2}} {{message}}</h1>
+  <h1 >{{num *2+' '+message}}</h1>
+
+  <!--v-once,vue有同步更新的特点，后台数据更改，显示数据会实时更新，有时不希望显示数据跟着变，用v-once，数据只接受一次，不会跟着变-->
+  <h1 v-once>{{num *2+' '+message}}</h1>
+
+  <!--v-html,把model传递过来的object用html的方式解析-->
+  <h1>{{url}}</h1><!--直接mustache会把url当做字符复制进来-->
+  <h1 v-html="url"></h1><!--所以一般用于传递带有html标签的内容，如超链接有href标签-->
+  <h1 v-html="message"></h1><!--没有标签的也能用，但是没屌用-->
+
+  <!--v-text，没屌用的东西-->
+  <h1>{{message}}123</h1>
+  <h1 v-text="message">123</h1><!--text会覆盖掉h1标签中的内容-->
+
+  <!--v-pre标签，禁止vue对标签内容进行解析-->
+  <h1 v-pre>{{num}}</h1>
+</div>
+
+
+<script>
+  let app = new Vue({
+    el:"#app",
+    data:{
+      message:'asd',
+      num:12,
+      url:'<a href="https://www.baidu.com">baidu</a>'
+    }
+  })
+</script>
+</body>
+</html>

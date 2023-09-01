@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+  <div id="app">
+		<mybtn :btn="btn[0]" @childclick="childclick"></mybtn>  <!--	3、父组件监听子组件自定义的事件	-->
+		<mybtn :btn="btn[1]" @childclick="childclick"></mybtn>
+		<h1>counter:{{counter}}</h1>
+  </div>
+
+	<template id="mybtn">
+		<button @click="btnclick(btn)">{{btn}}</button>  <!--	1、子组件被点击发出自定义事件	-->
+	</template>
+  <script src="../vue.js"></script>
+  <script>
+		const mybtn = {
+			template:'#mybtn',
+			props:{
+				btn:{
+					type:Array,
+					default() {
+						return [];
+					}
+				}
+			},
+			methods:{
+				btnclick(btn){
+					this.$emit('childclick',btn) //2、子组件脚本定义自定义事件的名字和参数
+				}
+			}
+		}
+
+
+    let app = new Vue({
+      el:'#app',
+      data:{
+				btn:['+','-'],
+				counter:0,
+      },
+      methods:{
+				childclick(btn){  // 4、父组件脚本执行
+					if (btn === '-'){
+						this.counter--
+					}else if (btn === '+'){
+						this.counter++
+					}
+				}
+      },
+      components:{
+				mybtn
+      }
+    })
+  </script>
+</body>
+</html>

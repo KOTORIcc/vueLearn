@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>?</title>
+</head>
+<body>
+
+<div id="abcd">
+    <h1>
+        {{message}}
+    </h1>
+</div> <!--//一个div就是一个html元素，id是这个元素的名字-->
+
+<script src = "../Vue/vue.js"></script>
+<script>
+  // let name = '21'//let定义一个变量
+  // const a = '23'//const常量
+  const app = new Vue({//用一个常量接受vue实例，需要传递一个对象，指定给vue管理，有点像java的匿名内部类对象
+    el: "#abcd",//指定要管理的元素,要带#，div元素命名不能用纯数字
+    data: {
+        message: "这是依靠vue实现的元素内容"
+    }
+  })
+</script>
+</body>
+</html>

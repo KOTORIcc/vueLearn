@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+  <div id="app">
+<!--		模板使用    -->
+	<cpn :tempmovies="movies"></cpn>
+
+
+  </div>
+
+<!--	模板区  -->
+	<template id="cpn">
+		<div>
+			<ul>
+				<li v-for="item in tempmovies">{{item}}</li>
+			</ul>
+		</div>
+	</template>
+
+  <script src="../vue.js"></script>
+  <script>
+
+<!--		模板实例区/子组件    -->
+		const cpn = {
+			template: '#cpn',
+			// props:['tempmovies'],
+			props:{ //可以限制输入的数据类型正确
+				tempmovies:Array
+			}
+		}
+
+    let app = new Vue({
+      el:'#app',
+      data:{
+				movies:['a','c','d']
+      },
+      methods:{
+      },
+      components:{
+				cpn  //绑定模板实例
+      }
+    })
+  </script>
+</body>
+</html>

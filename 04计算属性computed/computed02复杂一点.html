@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+  <h1>总价格：{{totalPrice}}</h1>
+</div>
+
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      books:[
+        {id:'01',name:'计算机组成原理',price:100},
+        {id:'02',name:'计算机操作系统',price:104},
+        {id:'03',name:'python',price:98},
+        {id:'04',name:'数据库导论',price:64},
+      ],
+      name:'abc'
+    },
+    computed:{
+      totalPrice:function (){
+        //3种遍历方式
+        let result = 0;
+        for (let i = 0; i < this.books.length; i++) {
+          result += this.books[i].price;
+        }
+
+        // for (let booksindex in this.books) {
+        //   result += this.books[booksindex].price;
+        // }
+
+        // for (let book of this.books) {
+        //   result +=book.price;
+        // }
+        return result;
+      },
+      //computed存的是属性，当然可以在里面定义一个属性
+      name:'xyxyx',
+      //完整的computed内属性存一个对象，对象内实现set/get方法用来获取属性值
+      wholecomputedfunc:{//申明一个属性，接受一个对象{}
+        //一般来说，作为一个需要计算得到的属性，并不希望可以通过外界set来改变值，所以一般都是不写set的
+        //包括简写的方式，其本质也是直接把get函数拿出来简化，去掉set
+        set: function(newValue){//名:function()申明这个值接收的是一个函数对象，可以简写省略掉function//是ES6的特性
+          this.name = newValue;
+        },
+        get: function(){
+          return this.name;
+        }
+      },
+      simplifiedfunc:function (){//简化过的常用写法就是把完整形态种的get单独拿出来，用自定义名字取代get，默认去掉set
+        return this.name;
+      },
+      simplifiedfunc1(){//所以这种写法可以加括号,因为function可以省略，而完整写法的：不能省略，因为那是给属性赋值一个对象的语法
+        return this.name;
+      }
+    }
+
+  })
+
+</script>
+
+</body>
+</html>

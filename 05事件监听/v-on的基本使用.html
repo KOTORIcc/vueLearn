@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <h1>{{counter}}</h1>
+  <button v-on:click="increment">+</button>
+<!--  v-on的语法糖-->
+  <button @click="decrement">-</button>
+<!--点击调用的函数是可以传递参数的-->
+  <button @click="clk(121)">test给参数</button>
+<!--    如果需要参数但是没有传递参数，vue会自动返回一个undefined，其他函数也是一样的-->
+  <button @click="clk()">test没给参数</button>
+<!--    如果需要一个参数，但是调用的时候没写括号，vue会自动返回event对象，可以 借此获得按钮监听事件-->
+  <button @click="clk">test没写括号</button>
+<!--    如果需要参数和event对象一起返回,要返回event的位置写$event，这是一个关键字-->
+  <button @click="clk2(12,$event)">test一个传参一个$event</button>
+</div>
+
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      counter:0,
+    },
+    methods:{
+      increment(){
+        this.counter++;
+      },
+      decrement(){
+        this.counter--;
+      },
+      clk(anumb){
+          console.log(anumb);
+      },
+      clk2(anum,event){
+          console.log(anum+event);
+      }
+    }
+  });
+  function afunc(aobj){
+      console.log(aobj)
+  }
+  //如果函数调用的时候没有按照规定传递一个参数，vue会自动给一个undefined
+  afunc();
+
+</script>
+
+
+</body>
+</html>

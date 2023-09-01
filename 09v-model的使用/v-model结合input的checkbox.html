@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+<!--  单选框的v-model绑定Boolean-->
+  <label for="license"><input type="checkbox" id="license" v-model="isagree">同意协议</label>
+  <h1>{{isagree}}</h1>
+  <button :disabled="!isagree">下一步</button>
+<!--  多选框的v-model绑定value值-->
+<!--  没写value默认为null，且v-model绑定为同一类-->
+  <label for="footb"><input type="checkbox" id="footb" value="footb" v-model="hobbies">足球</label>
+  <label for="basketb"><input type="checkbox" id="basketb" value="basketb" v-model="hobbies">篮球</label>
+  <label for="pingpong"><input type="checkbox" id="pingpong" value="pingpong" v-model="hobbies">乒乓</label>
+  <label for="bedm"><input type="checkbox" id="bedm" value="bedm" v-model="hobbies">羽毛球</label>
+  <h1>{{hobbies}}</h1>
+
+</div>
+<script src="../vue.js"></script>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+          isagree:false,
+          hobbies:[]
+        },
+        methods:{
+
+        }
+
+    })
+</script>
+</body>
+</html>

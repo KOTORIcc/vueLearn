@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body><!--vue是典型的mvvm架构，view viewmodel model-->
+<!--给用户看的就是view-->
+<div id="counter">
+  {{counter}}<!--如何实现view和model中的数据、函数联系，就是viewmodel干的事情，vue的viewmodel就是由new vue（）实例干的活-->
+  <button v-on:click="add">+</button>
+  <button @click="sub">-</button><!--@click是语法糖，是简写的方式-->
+</div>
+<!--实现逻辑的就是model-->
+<script src="../Vue/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:"#counter",
+    data:{
+      counter: 0
+    },
+    methods:{
+      add:function (){//函数 vue专属的方法定义方式
+        this.counter++
+      },
+      sub:function () {
+        this.counter--
+      }
+    },
+    //vue提供的一些生命周期函数，会在vue运行过程中，根据运行进度，自动调用
+    beforeCreate:function (){},
+    created:function (){},
+    beforeMount:function (){},
+    mounted:function (){},
+    beforeUpdate:function (){},
+    updated:function (){},
+    beforeDestroy:function (){},
+    destroyed:function (){}
+
+
+
+  })
+  function bt(){//方法，类似于java的类，但是省略类说明，直接写构造函数
+
+
+  }
+  let a = new bt()
+
+
+</script>
+
+</body>
+</html>

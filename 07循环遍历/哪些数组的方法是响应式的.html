@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+<ul>
+  <li v-for="item in letter">{{item}}</li>
+</ul>
+    <button @click="btnclick">按钮</button>
+
+
+</div>
+<script src="../vue.js"></script>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            letter:['a','b','c','d','e']
+        },
+        methods:{
+            btnclick(){
+                // this.letter.push('c','d','e')//在数组末尾添加数据
+                // this.letter.pop()//删掉最后一个数据
+                // this.letter.shift('c','d','e')//在数组头添加数据
+                // this.letter.splice()//splice(start,length,'elements'....)
+                // //从start索引开始删除length长度，再从start索引开始把elements添加进数组
+                // //没有length默认删到最后一个，一般都是要写的，代码规范性
+                // this.letter.sort()
+                this.letter.reverse()
+                // //直接修改数组元素是没有响应式的
+                // this.letter[0] = 'd'
+                //可以通过vue提供的函数来修改
+                // Vue.set(this.letter,0,'d')//这样改是有响应式的
+
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+  <div id="app">
+<!--		驼峰问题就是在模板使用的时候动态v-bind绑定属性时不能出现大写字符，否则数据传递会失败
+解决办法就是大写改小写 前面加一杠-->
+<!--		尽量避免驼峰出现    -->
+  	<cpn :cInfo="info"></cpn>
+		<cpn :c-info="info"></cpn>
+	</div>
+
+	<template id="cpn">
+		<div>
+			<h1>{{cInfo}}</h1>
+		</div>
+	</template>
+
+  <script src="../vue.js"></script>
+  <script>
+		const cpn = {
+			template:'#cpn',
+			props:{
+				cInfo:{
+					type:Object,
+					default(){
+						return{}
+					}
+				}
+			}
+		}
+
+    let app = new Vue({
+      el:'#app',
+      data:{
+				info:{
+					name:'a',
+					age:12,
+				}
+      },
+      methods:{
+      },
+      components:{
+				cpn
+      }
+    })
+  </script>
+</body>
+</html>

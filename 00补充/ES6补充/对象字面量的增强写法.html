@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+<script>
+  //这是普通的对象使用方法
+  const b = new object();
+  b.age = 12;
+  b.name = 'ada';
+  class object{
+    name;
+    age;
+  }
+  //这是对象的字面量使用方法，直接写{}
+  const a = {//这个大括号内的东西就是对象的字面量
+    name:'asda',
+    age:'12',
+    a(){//当然函数和属性都可以写在里面
+    },
+    b:function (){
+    }
+  }
+  //ES6的属性增强写法
+  const name='adad';
+  const age=21;
+  const c = {
+    name,
+    age,
+    //ES6的函数增强写法
+    afunc(){
+    }
+  }
+  //原写法
+  const old = {
+    name:name,//重新定义一个来接收
+    age:age,
+    oldfunc:function (){//有一个：function
+
+    }
+  }
+
+
+</script>
+
+</body>
+</html>

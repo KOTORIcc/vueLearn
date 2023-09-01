@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <ul>
+    <li v-for="item in movies">{{item}}</li><!--v-for是vue给的，vue会解析指令-->
+  </ul><!--item在movies中遍历-->
+</div>
+
+<script src="../Vue/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:"#app",
+    data:{
+      message:'asd',
+      movies:['a','b','c']
+    }
+  })
+</script>
+
+</body>
+</html>

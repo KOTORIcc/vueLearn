@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script src="../vue.js"></script>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+        },
+        methods:{
+
+        }
+
+    })
+    const num=[10,20,30,40,50]
+    // filter map reduce 这些高阶函数都是自动遍历数组元素，并对每一个元素都调用一次函数
+    // filter要求一个回调函数，返回一个数组
+    let newnum = num.filter(function (n) {//n就是filter遍历数组提取出来了一个数
+      return n<30//return=false时舍弃数n，=true时把n添加进新的数组
+    })
+    //把每个元素取出来，经过fuc处理，再塞进新的数组，返回一个数组
+    let mapnum = num.map(function (n) {
+      return n*2
+    })
+    //reduce需要funtion（pre，n）,num两个参数 ，返回一个数
+    // 遍历取出来的数为n，该数的前面一个数为previousValue
+    // pre和n经过fuc处理再塞进pre作下一次计算准备
+    //在遍历第一个数时，前面没有数，这时pre数由num初始化，
+    let reducenum = num.reduce(function (previousValue,n) {
+      return previousValue+n
+    },0)
+
+    // 都有返回值所以当然可以串起来写
+    let total = num.filter(function (n) {
+      return n<40
+    }).map(function (n){
+      return n*2
+    }).reduce(function (pre,n) {
+      return pre+n
+    },0)
+
+    //来点语法糖箭头函数
+    let total1 = num.filter(n => n<40).map(n => n*2).reduce((pre,n) => pre+n,0)
+    console.log(total1)
+</script>
+</body>
+</html>

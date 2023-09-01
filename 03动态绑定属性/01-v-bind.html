@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+<div id="app">
+  <h1></h1>
+<!--把name传递进来的字符串用html进行解析-->
+  <h1 v-html="name">b</h1>
+  <h1 v-html="img">b</h1>
+  <br>
+<!--把model中的url值绑定到href属性值，方便从服务器获取数据展示，不用把地址写死-->
+  <a v-bind:href="url">baid</a>
+  <img v-bind:src="imgurl" alt="null">
+  <br>
+<!--v-bind语法糖，加个冒号-->
+  <a :href="url">baid</a>
+</div>
+
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'abcd',
+      name:'<a href="https://www.baidu.com">a</a>',
+      img:'<img src="https://t7.baidu.com/it/u=1595072465,3644073269&fm=193&f=GIF" alt="none">',
+      imgurl:'https://t7.baidu.com/it/u=1595072465,3644073269&fm=193&f=GIF',
+      url:"https://www.baidu.com"
+    }
+  })
+</script>
+</body>
+</html>
