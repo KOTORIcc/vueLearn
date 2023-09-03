@@ -2,13 +2,5 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/13-Learn_Vue/vuerouter" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/14_Learn_vue3_Component/01_components" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/14_Learn_vue3_Component/02_animation" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/15_vue3_Composition_Api/01" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/15_vue3_Composition_Api/02_other_components" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/17_Learn_VueRouter/vuerouter" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/vue test/test1" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/vue test/vue2test" vcs="Git" />
   </component>
 </project>
