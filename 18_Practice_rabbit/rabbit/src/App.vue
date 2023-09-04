@@ -1,22 +1,23 @@
 <template>
   <div>
-    <router-view></router-view>
-    <div class="test">
-      test scss
-    </div>
-    <el-button type="primary">Hello</el-button>
+    <Layout></Layout>
   </div>
 
 </template>
 
 <script>
+import Layout from "@/views/Layout/index.vue";
 export default {
-  name: "App"
+  name: "App",
+  components:{
+    Layout
+  },
+  setup(){
+
+  }
 }
 </script>
 
 <style scoped lang="scss">
- .test{
-    color: $priceColor
- }
+
 </style>
