@@ -27,7 +27,7 @@
               <ul class="goods-sales">
                 <li>
                   <p>销量人气</p>
-                  <p>{{goodDetailData.collectCount}}</p>
+                  <p>{{goodDetailData.salesCount}}</p>
                   <p><i class="iconfont icon-task-filling"></i>销量人气</p>
                 </li>
                 <li>
@@ -37,12 +37,12 @@
                 </li>
                 <li>
                   <p>收藏人气</p>
-                  <p>300+</p>
+                  <p>{{goodDetailData.collectCount}}</p>
                   <p><i class="iconfont icon-favorite-filling"></i>收藏商品</p>
                 </li>
                 <li>
                   <p>品牌信息</p>
-                  <p>400+</p>
+                  <p>{{ goodDetailData.brand.name }}</p>
                   <p><i class="iconfont icon-dynamic-filling"></i>品牌主页</p>
                 </li>
               </ul>
@@ -93,13 +93,13 @@
                 <div class="goods-detail">
                   <!-- 属性 -->
                   <ul class="attrs">
-                    <li v-for="item in 3" :key="item.value">
-                      <span class="dt">白色</span>
-                      <span class="dd">纯棉</span>
+                    <li v-for="item in goodDetailData.details.properties" :key="item.value">
+                      <span class="dt">{{item.name}}</span>
+                      <span class="dd">{{ item.value }}</span>
                     </li>
                   </ul>
                   <!-- 图片 -->
-
+                  <img v-for="img in goodDetailData.details.pictures" :key="img" v-img-lazy="img" src="" alt="">
                 </div>
               </div>
             </div>
