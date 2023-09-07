@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import HomeCategory from "@/views/Home/components/HomeCategory.vue";
-import HomeProduct from "@/views/Home/components/HomeProduct.vue";
-import HomeBanner from "@/views/Home/components/HomeBanner.vue";
-import HomeNew from "@/views/Home/components/HomeNew.vue";
-import HomeHot from "@/views/Home/components/HomeHot.vue";
+import HomeCategory from "@/views/Layout/Home/components/HomeCategory.vue";
+import HomeProduct from "@/views/Layout/Home/components/HomeProduct.vue";
+import HomeBanner from "@/views/Layout/Home/components/HomeBanner.vue";
+import HomeNew from "@/views/Layout/Home/components/HomeNew.vue";
+import HomeHot from "@/views/Layout/Home/components/HomeHot.vue";
 
 export default {
   name: "index",

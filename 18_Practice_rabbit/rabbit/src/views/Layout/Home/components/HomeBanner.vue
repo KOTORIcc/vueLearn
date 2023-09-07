@@ -1,7 +1,7 @@
 <template>
   <div class="home-banner">
     <el-carousel height="500px">
-      <el-carousel-item v-for="item in BannerStore.PictureList" :key="item">
+      <el-carousel-item v-for="item in PictureList" :key="item">
         <img :src="item.imgUrl" alt="">
       </el-carousel-item>
     </el-carousel>
@@ -9,16 +9,21 @@
 </template>
 
 <script>
-import { useBannerStore } from "@/stores/banner.js";
+import {ref} from "vue";
+import {getBannerAPI} from "@/apis/home";
 
 export default {
   name: "HomeBanner",
   setup(){
-    useBannerStore().getBanner()
-    const BannerStore = useBannerStore()
-    console.log(BannerStore);
+    const PictureList = ref([])
+    const getBanner = async () => {
+      PictureList.value = (await getBannerAPI('HomePageBanner')).result
+    }
+
+    getBanner()
+
     return{
-      BannerStore
+      PictureList
     }
   }
 

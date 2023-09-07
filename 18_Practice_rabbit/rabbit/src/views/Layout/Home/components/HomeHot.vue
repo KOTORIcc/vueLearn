@@ -1,11 +1,11 @@
 <template>
-  <HomePanel Title="新鲜好物" SubTitle="新鲜出炉 品质靠谱">
+  <HomePanel Title="热门" SubTitle="新鲜出炉 品质靠谱">
     <ul class="goods-list">
-      <li v-for="item in New" :key="item.id">
+      <li v-for="item in Hot" :key="item.id">
         <RouterLink to="/">
           <img v-img-lazy="item.picture" src="" alt="" />
-          <p class="name">{{ item.name }}</p>
-          <p class="price">&yen;{{ item.price }}</p>
+          <p class="name">{{ item.title }}</p>
+          <p class="desc">{{ item.alt }}</p>
         </RouterLink>
       </li>
     </ul>
@@ -13,26 +13,23 @@
 </template>
 
 <script>
-import HomePanel from "@/views/Home/components/HomePanel.vue";
-import { getNewAPI } from "@/apis/home";
-import { ref } from "vue";
+import HomePanel from "@/views/Layout/Home/components/HomePanel.vue";
+import {ref} from "vue";
+import {getHotAPI} from "@/apis/home";
 
 export default {
-  name: "HomeNew",
-  components:{
-    HomePanel
-  },
+  name: "HomeHot",
+  components: {HomePanel},
   setup(){
-    const New = ref([])
+    const Hot = ref([])
     const getNewList = async () => {
-      New.value = (await getNewAPI()).result
-      console.log(New);
+      Hot.value = (await getHotAPI()).result
     }
 
     getNewList()
 
     return{
-      New
+      Hot
     }
   }
 }
@@ -42,13 +39,11 @@ export default {
 .goods-list {
   display: flex;
   justify-content: space-between;
-  height: 406px;
+  height: 426px;
 
   li {
     width: 306px;
     height: 406px;
-
-    background: #f0f9f4;
     transition: all .5s;
 
     &:hover {
@@ -65,13 +60,11 @@ export default {
       font-size: 22px;
       padding-top: 12px;
       text-align: center;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
     }
 
-    .price {
-      color: $priceColor;
+    .desc {
+      color: #999;
+      font-size: 18px;
     }
   }
 }

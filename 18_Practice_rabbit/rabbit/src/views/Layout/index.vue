@@ -3,7 +3,7 @@
     <LayoutFixed></LayoutFixed>
     <LayoutNav></LayoutNav>
     <LayoutHeader></LayoutHeader>
-    <Home></Home>
+    <router-view></router-view>
     <LayoutFooter></LayoutFooter>
   </div>
 
@@ -14,7 +14,7 @@ import LayoutNav from "@/views/Layout/components/LayoutNav.vue";
 import LayoutFooter from "@/views/Layout/components/LayoutFooter.vue";
 import LayoutHeader from "@/views/Layout/components/LayoutHeader.vue";
 import LayoutFixed from "@/views/Layout/components/LayoutFixed.vue";
-import Home from '@/views/Home/index.vue'
+// import Home from '@/views/Home/index.vue'
 
 import {useCategoryStore} from "@/stores/category";
 export default {
@@ -24,7 +24,7 @@ export default {
     LayoutFooter,
     LayoutHeader,
     LayoutFixed,
-    Home
+    // Home
   },
   setup(){
     useCategoryStore().getCategory()

@@ -12,7 +12,7 @@
         </li>
 
         <li v-for="item in categoryStore.categoryList" :key="item.name">
-          <RouterLink to="/">{{ item.name }}</RouterLink>
+          <RouterLink active-class="active" :to="`/category/${ item.id }`">{{ item.name }}</RouterLink>
         </li>
       </ul>
 
