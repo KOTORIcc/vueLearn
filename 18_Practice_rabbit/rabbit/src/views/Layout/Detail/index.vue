@@ -105,7 +105,8 @@
             </div>
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
-
+              <detailHot type="24小时热榜"></detailHot>
+              <detailHot type="周热榜"></detailHot>
             </div>
           </div>
         </div>
@@ -117,12 +118,13 @@
 <script>
 import { useGoodDetail } from '../Detail/composable/useDetailData'
 import {useRoute} from "vue-router";
+import detailHot from "@/views/Layout/Detail/components/detailHot.vue";
 export default {
   name: "index",
+  components:{detailHot},
   setup(){
     const route = useRoute()
     const goodDetailData = useGoodDetail(route.params.id)
-    console.log(goodDetailData);
     return{
       goodDetailData
     }
