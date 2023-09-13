@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import {useHotGoodsData} from "@/views/Layout/Detail/composable/useHotGoodsData";
-import {ref} from "vue";
-import {useRoute} from "vue-router";
+import { useHotGoodsData } from "@/views/Layout/Detail/composable/useHotGoodsData";
+import { ref } from "vue";
+import { useRoute } from "vue-router";
 export default {
   name: "detailHot",
   props:{
@@ -30,7 +30,6 @@ export default {
     const route = useRoute()
     const reqData = ref({ id:route.params.id, type:Type, limit:3})
     const HotGoodsData = useHotGoodsData(reqData.value)
-    console.log(HotGoodsData);
     return{
       HotGoodsData
     }

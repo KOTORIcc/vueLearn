@@ -22,7 +22,7 @@
           <div class="goods-info">
             <div class="media">
               <!-- 图片预览区 -->
-
+              <imgView :imageList="goodDetailData.mainPictures"></imgView>
               <!-- 统计数量 -->
               <ul class="goods-sales">
                 <li>
@@ -71,7 +71,7 @@
                 </dl>
               </div>
               <!-- sku组件 -->
-
+              <XtxSku :goods="goodSku" @change="skuChangeHandler"></XtxSku>
               <!-- 数据组件 -->
 
               <!-- 按钮组件 -->
@@ -94,7 +94,7 @@
                   <!-- 属性 -->
                   <ul class="attrs">
                     <li v-for="item in goodDetailData.details.properties" :key="item.value">
-                      <span class="dt">{{item.name}}</span>
+                      <span class="dt">{{ item.name }}</span>
                       <span class="dd">{{ item.value }}</span>
                     </li>
                   </ul>
@@ -119,14 +119,29 @@
 import { useGoodDetail } from '../Detail/composable/useDetailData'
 import {useRoute} from "vue-router";
 import detailHot from "@/views/Layout/Detail/components/detailHot.vue";
+
 export default {
   name: "index",
-  components:{detailHot},
+  components:{
+    detailHot,
+  },
   setup(){
     const route = useRoute()
     const goodDetailData = useGoodDetail(route.params.id)
+    console.log(goodDetailData);
+
+    const goodSku = {
+      specs:goodDetailData.value.specs,
+      skus: goodDetailData.value.skus,
+    }
+
+    const skuChangeHandler = () => {
+
+    }
     return{
-      goodDetailData
+      goodDetailData,
+      goodSku,
+      skuChangeHandler
     }
   }
 }
