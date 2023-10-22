@@ -19,24 +19,26 @@
         </nav>
         <div class="account-box">
           <div class="form">
-            {{form.password}}{{form.account}}
-<!--            通过查询elementPlus手册 获取表单的使用方法 传递进去一个model和rules props 告诉表单有哪些数据 以及数据的限制-->
-            <el-form :model="form" :rules="rules" label-position="right" label-width="60px"
-                     status-icon>
-<!--              从父组件中传递进去的form中 为子输入框绑定一个 属性 -->
+            <!--通过查询elementPlus手册 获取表单的使用方法 传递进去一个model和rules props 告诉表单有哪些数据 以及数据的限制-->
+            <el-form :model="form"
+                     :rules="rules"
+                     label-position="right"
+                     label-width="60px"
+                     status-icon ref="FormRef">
+              <!-- 从父组件中传递进去的form中 为子输入框绑定一个 属性 -->
               <el-form-item  prop="account" label="账户">
-<!--                双向绑定表单数据-->
+                <!--双向绑定表单数据-->
                 <el-input v-model="form.account"/>
               </el-form-item>
               <el-form-item prop="password" label="密码">
                 <el-input v-model="form.password"/>
               </el-form-item>
-              <el-form-item label-width="22px">
-                <el-checkbox  size="large">
+              <el-form-item prop="agree" label-width="22px">
+                <el-checkbox  size="large" v-model="form.agree">
                   我已同意隐私条款和服务条款
                 </el-checkbox>
               </el-form-item>
-              <el-button size="large" class="subBtn">点击登录</el-button>
+              <el-button size="large" class="subBtn" @click="Login">点击登录</el-button>
             </el-form>
           </div>
         </div>
@@ -62,26 +64,97 @@
 
 <script>
 import {ref} from "vue";
-
+import {useRouter} from "vue-router";
+import { ElMessage } from "element-plus";
+import 'element-plus/es/components/message/style/css'
+import {useUserStore} from "@/stores/user";
+import {useCartStore} from "@/stores/cartStore";
 export default {
   name: "index",
   setup(){
     const form = ref({
       account: '',
-      password: ''
+      password: '',
+      agree: true
     })
-
     const rules = {
       account:[
-        { require:true , message: '用户名不能为空', trigger: 'blur'},//失去焦点时触发
+        {
+          validator:(rule, val, cb) => {
+            if (val === '') {
+              cb(new Error('用户名不能为空'))
+            } else {
+              cb()
+            }
+          } ,trigger: 'blur'},//失去焦点时触发
       ],
       password:[
-        { require: true, message: '密码不能为空', trigger: 'blur'},
-        { min:6, max:14, message: '密码需要6-14位', trigger: 'blur'}
+        {
+          validator:(rule, val, cb) => {
+            if (val === '') {
+              cb(new Error('密码不能为空'))
+            } else {
+              cb()
+            }
+          }, trigger: 'blur'},
+        {
+          validator:(rule, val, cb) => {
+            if (5 < val.length && val.length < 14) {
+              cb()
+            } else {
+              cb(new Error('密码需要6-14位'))
+            }
+          }, trigger: 'blur'}
+      ],
+      agree:[
+        {
+          validator:(rule, val, cb) => {
+            if (val) {
+              cb()
+            } else {
+              cb(new Error('请勾选协议'))
+            }
+          }
+        }
       ]
     }
+    const FormRef = ref(null)
+
+    const cartList = useCartStore().cartList
+    const router = useRouter()
+    const userStore = useUserStore()
+    const Login = () => {
+      // 通过ref获取表单元素 在点击登录按钮时调用 该元素下的validate方法 验证所有注册过的rules
+      FormRef.value.validate(async (valid) => {
+      //   所有表单通过校验才能通过 如果validate没有通过 valid会返回一个false
+        if (valid) {
+          const { account, password } = form.value
+          //这里的异步同步问题很操蛋 我的解决办法是 在创建pinia仓库时直接返回一个值 使用await阻塞 直到从服务器取回数值再作是否跳转的判定
+          const userInfo = await userStore.getUserInfo({account, password})
+          if (userInfo.result.token){
+            await useCartStore().getCart()
+            await useCartStore().mergeCart()
+            console.log(cartList);
+            ElMessage({
+              type: 'success',
+              message: '登录成功'
+            })
+            await router.replace({path: '/'})
+          } else {
+            ElMessage({
+              type: 'warning',
+              message: '登录失败'
+            })
+          }
+
+
+        }
+      })
+    }
+
     return{
-      form, rules
+      form, rules,
+      FormRef, Login
     }
   }
 }

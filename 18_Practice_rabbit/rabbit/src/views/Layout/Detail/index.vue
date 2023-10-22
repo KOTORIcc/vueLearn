@@ -1,6 +1,6 @@
 <template>
   <div class="xtx-goods-page">
-    <div class="container" v-if="goodDetailData.categories">
+    <div class="container" v-if="ifshow">
       <div class="bread-container">
         <el-breadcrumb separator=">">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
@@ -73,10 +73,10 @@
               <!-- sku组件 -->
               <XtxSku :goods="goodSku" @change="skuChangeHandler"></XtxSku>
               <!-- 数据组件 -->
-
+              <el-input-number :min="1" v-model="count" @change="countChange(count)" />
               <!-- 按钮组件 -->
               <div>
-                <el-button size="large" class="btn">
+                <el-button size="large" class="btn" @click="addCart">
                   加入购物车
                 </el-button>
               </div>
@@ -99,7 +99,7 @@
                     </li>
                   </ul>
                   <!-- 图片 -->
-                  <img v-for="img in goodDetailData.details.pictures" :key="img" v-img-lazy="img" src="" alt="">
+                  <img v-for="img in goodDetailData.details.pictures" :key="img" src="img" alt="">
                 </div>
               </div>
             </div>
@@ -119,6 +119,9 @@
 import { useGoodDetail } from '../Detail/composable/useDetailData'
 import {useRoute} from "vue-router";
 import detailHot from "@/views/Layout/Detail/components/detailHot.vue";
+import { ref } from 'vue'
+import {ElMessage} from "element-plus";
+import {useCartStore} from "@/stores/cartStore";
 
 export default {
   name: "index",
@@ -127,21 +130,64 @@ export default {
   },
   setup(){
     const route = useRoute()
-    const goodDetailData = useGoodDetail(route.params.id)
-    console.log(goodDetailData);
-
+    const cartStore = useCartStore()
+    const goodDetailData = ref(null)
     const goodSku = {
-      specs:goodDetailData.value.specs,
-      skus: goodDetailData.value.skus,
+      specs:null,
+      skus: null,
+    }
+    const ifshow = ref(false)
+    useGoodDetail(route.params.id)
+      .then((res) => [
+        goodDetailData.value = res,
+        goodSku.specs = goodDetailData.value.specs,
+        goodSku.skus = goodDetailData.value.skus,
+        ifshow.value = true,
+      ])
+
+
+    let skuObj = {}
+    const skuChangeHandler = (sku) => {
+      skuObj = sku
     }
 
-    const skuChangeHandler = () => {
+    const count = ref(1)
+    const countChange = (count) => {
+      console.log(count);
+    }
 
+    const addCart = () => {
+      // console.log(skuObj);
+      if (skuObj.skuId) {
+        // console.log(skuObj.skuId);
+        cartStore.addCart({
+          id:goodDetailData.value.id,
+          name:goodDetailData.value.name,
+          picture:goodDetailData.value.mainPictures[0],
+          price: goodDetailData.value.price,
+          count: count.value,
+          skuId: skuObj.skuId,
+          attrsText: skuObj.specsText,
+          selected: true,
+        })
+
+        ElMessage({
+          type:'success',
+          message:'成功添加购物车'
+        })
+      } else {
+        ElMessage({
+          type:'warning',
+          message:'请选择规格'
+        })
+      }
     }
     return{
+      ifshow,
       goodDetailData,
       goodSku,
-      skuChangeHandler
+      skuObj, skuChangeHandler, addCart,
+      count, countChange
     }
   }
 }

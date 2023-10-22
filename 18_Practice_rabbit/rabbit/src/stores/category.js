@@ -10,8 +10,7 @@ export const useCategoryStore = defineStore('category', () => {
   // 所以加上await正常情况下可以直接获取 API返回的值 而不必再通过.then获取
   // console.log(await getCategoryAPI());
   const getCategory = async () => {
-    const res = await getCategoryAPI()
-    categoryList.value = res.result
+    categoryList.value = (await getCategoryAPI()).result
   }
   return{
     categoryList,

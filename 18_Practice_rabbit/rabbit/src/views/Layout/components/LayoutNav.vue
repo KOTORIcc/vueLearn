@@ -2,10 +2,14 @@
   <nav class="app-topnav">
     <div class="container">
       <ul>
-        <template v-if="false">
-          <li><a href="javascript:;"><i class="iconfont icon-user"></i>周杰伦</a></li>
+        <template v-if="JSON.stringify(UserStore.userInfo ) !== '{}' || UserStore.userInfo.result">
+          <li><a href="javascript:;"><i class="iconfont icon-user"></i>{{UserStore.userInfo.result.nickname}}</a></li>
           <li>
-            <el-popconfirm title="确认退出吗?" confirm-button-text="确认" cancel-button-text="取消">
+            <el-popconfirm
+              @confirm="confirmLogOut"
+              title="确认退出吗?"
+              confirm-button-text="确认"
+              cancel-button-text="取消">
               <template #reference>
                 <a href="javascript:;">退出登录</a>
               </template>
@@ -25,8 +29,31 @@
 </template>
 
 <script>
+import { useUserStore } from '@/stores/user'
+import {useRouter} from 'vue-router'
+import {useCartStore} from "@/stores/cartStore";
 export default {
   name: "LayoutNav",
+  setup() {
+
+    const router = useRouter()
+    const UserStore = useUserStore()
+    const confirmLogOut = () => {
+      router.replace({path:'/login'})
+        .then(() => {
+          const UserStore = useUserStore()
+          const cartStore = useCartStore()
+          UserStore.clearUserInfo()
+          cartStore.clearCart()
+
+        }
+      )
+    }
+    return{
+      UserStore,
+      confirmLogOut
+    }
+  }
 }
 </script>
 

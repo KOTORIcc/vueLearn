@@ -5,6 +5,7 @@ import category from "@/views/Layout/Category/index.vue";
 import home from "@/views/Layout/Home/index.vue";
 import subCategory from '@/views/Layout/SubCategory/index.vue'
 import detail from "@/views/Layout/Detail/index.vue";
+import CartList from "@/views/Layout/CartList/index.vue";
 
 const routes = [
   {
@@ -26,13 +27,18 @@ const routes = [
       {
         path: 'detail/:id',
         component: detail,
+      },
+      {
+        path: 'CartList',
+        component: CartList
       }
     ]
   },
   {
     path: '/Login',
     component: Login
-  }
+  },
+
 ]
 
 const router = createRouter({

@@ -21,7 +21,7 @@
         <input type="text" placeholder="搜一搜">
       </div>
       <!-- 头部购物车 -->
-
+      <headerCart></headerCart>
     </div>
   </header>
 </template>
@@ -29,9 +29,11 @@
 <script>
 
 import {useCategoryStore} from "@/stores/category";
+import HeaderCart from "@/views/Layout/components/HeaderCart.vue";
 
 export default {
   name: "LayoutHeader",
+  components: {HeaderCart},
   setup(){
     const categoryStore = useCategoryStore()
     return{
